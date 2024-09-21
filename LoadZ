@@ -1,0 +1,1280 @@
+--[[
+
+ $$\        $$$$$$$$\   $$$$$$$$\   $$$$$$$ \       $$$$$$$$\
+ $$ |       $$   _$$ |  $$   _$$ |  $$   _$$ |      \___  $$ |
+ $$ |       $$  | $$ |  $$  / $$ |  $$  | $$ |          $$  /
+ $$ |       $$  | $$ |  $$$$$$$$ |  $$  | $$ |        $$  /
+ $$ |       $$  | $$ |  $$  __$$ |  $$  | $$ |      $$  /
+ $$$$$$$$|  $$$$$$$$ |  $$ |  $$ |  $$$$$$$ /       $$$$$$$$ |
+ \_______|  \________|  \__|  \__|  \______/        \________|
+
+
+
+
+]]--
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "👑Load Z👑",
+   LoadingTitle = "Load Z",
+   LoadingSubtitle = "by Rogue",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "RoguesLoadZ"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Load Z | Key",
+      Subtitle = "Key In Discord Channel",
+      Note = "Private Key",
+      FileName = "LoadZkey", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"https://raw.githubusercontent.com/Rogue-Unblocked/LoadZ-Key/refs/heads/main/LoadZ%20Key"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("🔫AimLock🔫", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("Main")
+
+Rayfield:Notify({
+   Title = "Script Executed",
+   Content = "Thanks for using Load Z gui",
+   Duration = 5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+      Ignore = {
+         Name = "No Problem!",
+         Callback = function()
+         print("The user tapped No Problem!")
+      end
+   },
+},
+})
+
+local Button = MainTab:CreateButton({
+   Name = "AimLock[E]",
+   Callback = function()
+local Settings = {
+
+    rewrittenmain = {
+
+        Enabled = true,
+
+        Key = "e",
+
+        DOT = true,
+
+        AIRSHOT = false,
+
+        NOTIF = true,
+
+        AUTOPRED = true,
+
+        FOV = math.huge,
+
+        RESOVLER = false
+
+    }
+
+}
+
+ 
+
+local SelectedPart = "HumanoidRootPart"
+
+local Prediction = true
+
+local PredictionValue = 0.1413
+
+ 
+
+ 
+
+    local AnchorCount = 0
+
+    local MaxAnchor = 50
+
+ 
+
+    local CC = game:GetService"Workspace".CurrentCamera
+
+    local Plr;
+
+    local enabled = false
+
+    local accomidationfactor = 0.121
+
+    local mouse = game.Players.LocalPlayer:GetMouse()
+
+    local placemarker = Instance.new("Part", game.Workspace)
+
+ 
+
+    function makemarker(Parent, Adornee, Color, Size, Size2)
+
+        local e = Instance.new("BillboardGui", Parent)
+
+        e.Name = "PP"
+
+        e.Adornee = Adornee
+
+        e.Size = UDim2.new(Size, Size2, Size, Size2)
+
+        e.AlwaysOnTop = Settings.rewrittenmain.DOT
+
+        local a = Instance.new("Frame", e)
+
+        if Settings.rewrittenmain.DOT == true then
+
+        a.Size = UDim2.new(1, 0, 1, 0)
+
+        else
+
+        a.Size = UDim2.new(0, 0, 0, 0)
+
+        end
+
+        if Settings.rewrittenmain.DOT == true then
+
+        a.Transparency = 0
+
+        a.BackgroundTransparency = 0
+
+        else
+
+        a.Transparency = 1
+
+        a.BackgroundTransparency = 1
+
+        end
+
+        a.BackgroundColor3 = Color
+
+        local g = Instance.new("UICorner", a)
+
+        if Settings.rewrittenmain.DOT == false then
+
+        g.CornerRadius = UDim.new(0, 0)
+
+        else
+
+        g.CornerRadius = UDim.new(1, 1) 
+
+        end
+
+        return(e)
+
+    end
+
+ 
+
+ 
+
+    local data = game.Players:GetPlayers()
+
+    function noob(player)
+
+        local character
+
+        repeat wait() until player.Character
+
+        local handler = makemarker(guimain, player.Character:WaitForChild(SelectedPart), Color3.fromRGB(107, 184, 255), 0.3, 3)
+
+        handler.Name = player.Name
+
+        player.CharacterAdded:connect(function(Char) handler.Adornee = Char:WaitForChild(SelectedPart) end)
+
+ 
+
+ 
+
+        spawn(function()
+
+            while wait() do
+
+                if player.Character then
+
+                end
+
+            end
+
+        end)
+
+    end
+
+ 
+
+    for i = 1, #data do
+
+        if data[i] ~= game.Players.LocalPlayer then
+
+            noob(data[i])
+
+        end
+
+    end
+
+ 
+
+    game.Players.PlayerAdded:connect(function(Player)
+
+        noob(Player)
+
+    end)
+
+ 
+
+    spawn(function()
+
+        placemarker.Anchored = true
+
+        placemarker.CanCollide = false
+
+        if Settings.rewrittenmain.DOT == true then
+
+        placemarker.Size = Vector3.new(0, 0, 0)
+
+        else
+
+        placemarker.Size = Vector3.new(0, 0, 0)
+
+        end
+
+        placemarker.Transparency = 0.75
+
+        if Settings.rewrittenmain.DOT then
+
+        makemarker(placemarker, placemarker, Color3.fromRGB(255, 145, 0), 0.40, 0)
+
+        end
+
+    end)
+
+ 
+
+    game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(k)
+
+        if k == Settings.rewrittenmain.Key and Settings.rewrittenmain.Enabled then
+
+            if enabled == true then
+
+                enabled = false
+
+                if Settings.rewrittenmain.NOTIF == true then
+
+                    Plr = getClosestPlayerToCursor()
+
+                game.StarterGui:SetCore("SendNotification", {
+
+                    Title = "Shertbert.cc";
+
+                    Text = "Unlocked",
+
+                    Duration = 5
+
+                })
+
+            end
+
+            else
+
+                Plr = getClosestPlayerToCursor()
+
+                enabled = true
+
+                if Settings.rewrittenmain.NOTIF == true then
+
+ 
+
+                    game.StarterGui:SetCore("SendNotification", {
+
+                        Title = "LoadZ.cc";
+
+                        Text = "Target: "..tostring(Plr.Character.Humanoid.DisplayName),
+
+                        Duration = 5
+
+                    })
+
+ 
+
+                end
+
+            end
+
+        end
+
+    end)
+
+ 
+
+ 
+
+ 
+
+    function getClosestPlayerToCursor()
+
+        local closestPlayer
+
+        local shortestDistance = Settings.rewrittenmain.FOV
+
+ 
+
+        for i, v in pairs(game.Players:GetPlayers()) do
+
+            if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") then
+
+                local pos = CC:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+
+                local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(mouse.X, mouse.Y)).magnitude
+
+                if magnitude < shortestDistance then
+
+                    closestPlayer = v
+
+                    shortestDistance = magnitude
+
+                end
+
+            end
+
+        end
+
+        return closestPlayer
+
+    end
+
+ 
+
+    local pingvalue = nil;
+
+    local split = nil;
+
+    local ping = nil;
+
+ 
+
+    game:GetService"RunService".Stepped:connect(function()
+
+        if enabled and Plr.Character ~= nil and Plr.Character:FindFirstChild("HumanoidRootPart") then
+
+            placemarker.CFrame = CFrame.new(Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor))
+
+        else
+
+            placemarker.CFrame = CFrame.new(0, 9999, 0)
+
+        end
+
+        if Settings.rewrittenmain.AUTOPRED == true then
+
+             pingvalue = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+
+             split = string.split(pingvalue,'(')
+
+             ping = tonumber(split[1])
+
+            if ping < 130 then
+
+                PredictionValue = 0.170
+
+            elseif ping < 125 then
+
+                PredictionValue = 0.169
+
+            elseif ping < 110 then
+
+                PredictionValue = 0.168
+
+            elseif ping < 105 then
+
+                PredictionValue = 0.167
+
+            elseif ping < 90 then
+
+                PredictionValue = 0.166
+
+            elseif ping < 80 then
+
+                PredictionValue = 0.165
+
+            elseif ping < 70 then
+
+                PredictionValue = 0.1347
+
+            elseif ping < 60 then
+
+                PredictionValue = 0.123
+
+            elseif ping < 50 then
+
+                PredictionValue = 0.135
+
+            elseif ping < 40 then
+
+                PredictionValue = 0.12
+
+            end
+
+        end
+
+    end)
+
+ 
+
+    local mt = getrawmetatable(game)
+
+    local old = mt.__namecall
+
+    setreadonly(mt, false)
+
+    mt.__namecall = newcclosure(function(...)
+
+        local args = {...}
+
+        if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" and Settings.rewrittenmain.Enabled and Plr.Character ~= nil then
+
+ 
+
+            -- args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*accomidationfactor)
+
+            --[[
+
+            if Settings.rewrittenmain.AIRSHOT == true then
+
+                if game.Workspace.Players[Plr.Name].Humanoid:GetState() == Enum.HumanoidStateType.Freefall then -- Plr.Character:WaitForChild("Humanoid"):GetState() == Enum.HumanoidStateType.Freefall
+
+ 
+
+                    --// Airshot
+
+                    args[3] = Plr.Character.LeftFoot.Position+(Plr.Character.LeftFoot.Velocity*PredictionValue)
+
+ 
+
+                else
+
+                    args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*PredictionValue)
+
+ 
+
+                end
+
+            else
+
+                    args[3] = Plr.Character.HumanoidRootPart.Position+(Plr.Character.HumanoidRootPart.Velocity*PredictionValue)
+
+            end
+
+            ]]
+
+            if Prediction == true then
+
+ 
+
+            args[3] = Plr.Character[SelectedPart].Position+(Plr.Character[SelectedPart].Velocity*PredictionValue)
+
+ 
+
+            else
+
+ 
+
+            args[3] = Plr.Character[SelectedPart].Position
+
+ 
+
+            end
+
+ 
+
+            return old(unpack(args))
+
+        end
+
+        return old(...)
+
+    end)
+
+ 
+
+    game:GetService("RunService").RenderStepped:Connect(function()
+
+        if Settings.rewrittenmain.RESOVLER == true and Plr.Character ~= nil and enabled and Settings.rewrittenmain.Enabled then
+
+        if Settings.rewrittenmain.AIRSHOT == true and enabled and Plr.Character ~= nil then
+
+ 
+
+            if game.Workspace.Players[Plr.Name].Humanoid:GetState() == Enum.HumanoidStateType.Freefall then -- Plr.Character:WaitForChild("Humanoid"):GetState() == Enum.HumanoidStateType.Freefall
+
+ 
+
+                --// Airshot
+
+ 
+
+                --// Anchor Check
+
+ 
+
+                if Plr.Character ~= nil and Plr.Character.HumanoidRootPart.Anchored == true then
+
+                    AnchorCount = AnchorCount + 1
+
+                    if AnchorCount >= MaxAnchor then
+
+                        Prediction = false
+
+                        wait(2)
+
+                        AnchorCount = 0;
+
+                    end
+
+                else
+
+                    Prediction = true
+
+                    AnchorCount = 0;
+
+                end
+
+ 
+
+                SelectedPart = "LeftFoot"
+
+ 
+
+            else
+
+                --// Anchor Check
+
+ 
+
+                if Plr.Character ~= nil and Plr.Character.HumanoidRootPart.Anchored == true then
+
+                    AnchorCount = AnchorCount + 1
+
+                    if AnchorCount >= MaxAnchor then
+
+                        Prediction = false
+
+                        wait(2)
+
+                        AnchorCount = 0;
+
+                    end
+
+                else
+
+                    Prediction = true
+
+                    AnchorCount = 0;
+
+                end
+
+ 
+
+                SelectedPart = "HumanoidRootPart"
+
+ 
+
+            end
+
+            else
+
+ 
+
+                --// Anchor Check
+
+ 
+
+                if Plr.Character ~= nil and Plr.Character.HumanoidRootPart.Anchored == true then
+
+                    AnchorCount = AnchorCount + 1
+
+                    if AnchorCount >= MaxAnchor then
+
+                        Prediction = false
+
+                        wait(2)
+
+                        AnchorCount = 0;
+
+                    end
+
+                else
+
+                    Prediction = true
+
+                    AnchorCount = 0;
+
+                end
+
+ 
+
+                SelectedPart = "HumanoidRootPart"
+
+            end
+
+ 
+
+        else
+
+                SelectedPart = "HumanoidRootPart"
+
+        end
+
+    end)
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "CamLock",
+   Callback = function()
+local Camera = workspace.CurrentCamera
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+local Holding = false
+
+_G.AimbotEnabled = true
+_G.TeamCheck = false -- If set to true then the script would only lock your aim at enemy team members.
+_G.AimPart = "Head" -- Where the aimbot script would lock at.
+_G.Sensitivity = 0 -- How many seconds it takes for the aimbot script to officially lock onto the target's aimpart.
+
+local function GetClosestPlayer()
+	local MaximumDistance = math.huge
+	local Target = nil
+  
+  	coroutine.wrap(function()
+    		wait(20); MaximumDistance = math.huge -- Reset the MaximumDistance so that the Aimbot doesn't remember it as a very small variable and stop capturing players...
+  	end)()
+
+	for _, v in next, Players:GetPlayers() do
+		if v.Name ~= LocalPlayer.Name then
+			if _G.TeamCheck == true then
+				if v.Team ~= LocalPlayer.Team then
+					if v.Character ~= nil then
+						if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+							if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+								local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+								local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
+								
+								if VectorDistance < MaximumDistance then
+									Target = v
+                  							MaximumDistance = VectorDistance
+								end
+							end
+						end
+					end
+				end
+			else
+				if v.Character ~= nil then
+					if v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+						if v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+							local ScreenPoint = Camera:WorldToScreenPoint(v.Character:WaitForChild("HumanoidRootPart", math.huge).Position)
+							local VectorDistance = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
+							
+							if VectorDistance < MaximumDistance then
+								Target = v
+               							MaximumDistance = VectorDistance
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return Target
+end
+
+UserInputService.InputBegan:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+        Holding = true
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(Input)
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+        Holding = false
+    end
+end)
+
+RunService.RenderStepped:Connect(function()
+    if Holding == true and _G.AimbotEnabled == true then
+        TweenService:Create(Camera, TweenInfo.new(_G.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(Camera.CFrame.Position, GetClosestPlayer().Character[_G.AimPart].Position)}):Play()
+    end
+end)
+   end,
+})
+
+local PlayerTab = Window:CreateTab("🧑Player🧑", nil) -- Title, Image
+local PlayerSection = PlayerTab:CreateSection("Player")
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "WalkSpeed Slider",
+   Range = {0, 200},
+   Increment = 1,
+   Suffix = "WalkSpeed",
+   CurrentValue = 16,
+   Flag = "LoadZspeed", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+   end,
+})
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "JumpPower Slider",
+   Range = {0, 300},
+   Increment = 1,
+   Suffix = "JumpPower",
+   CurrentValue = 50,
+   Flag = "LoadZjump", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+   end,
+})
+
+local Button = PlayerTab:CreateButton({
+   Name = "Fly[X]",
+   Callback = function()
+repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+local mouse = game.Players.LocalPlayer:GetMouse() 
+repeat wait() until mouse
+local plr = game.Players.LocalPlayer 
+local torso = plr.Character.HumanoidRootPart 
+local flying = true
+local deb = true 
+local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+local maxspeed = 100 
+local speed = 0 
+
+function Fly() 
+local bg = Instance.new("BodyGyro", torso) 
+bg.P = 9e4 
+bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+bg.cframe = torso.CFrame 
+local bv = Instance.new("BodyVelocity", torso) 
+bv.velocity = Vector3.new(0,0.1,0) 
+bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+repeat wait() 
+plr.Character.Humanoid.PlatformStand = true 
+if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+speed = speed+.5+(speed/maxspeed) 
+if speed > maxspeed then 
+speed = maxspeed 
+end 
+elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+speed = speed-1 
+if speed < 0 then 
+speed = 0 
+end 
+end 
+if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+else 
+bv.velocity = Vector3.new(0,0.1,0) 
+end 
+bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+until not flying 
+ctrl = {f = 0, b = 0, l = 0, r = 0} 
+lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+speed = 0 
+bg:Destroy() 
+bv:Destroy() 
+plr.Character.Humanoid.PlatformStand = false 
+end 
+mouse.KeyDown:connect(function(key) 
+if key:lower() == "x" then 
+if flying then flying = false 
+else 
+flying = true 
+Fly() 
+end 
+elseif key:lower() == "w" then 
+ctrl.f = 1 
+elseif key:lower() == "s" then 
+ctrl.b = -1 
+elseif key:lower() == "a" then 
+ctrl.l = -1 
+elseif key:lower() == "d" then 
+ctrl.r = 1 
+end 
+end) 
+mouse.KeyUp:connect(function(key) 
+if key:lower() == "w" then 
+ctrl.f = 0 
+elseif key:lower() == "s" then 
+ctrl.b = 0 
+elseif key:lower() == "a" then 
+ctrl.l = 0 
+elseif key:lower() == "d" then 
+ctrl.r = 0 
+end 
+end)
+Fly()
+   end,
+})
+
+local Button = PlayerTab:CreateButton({
+   Name = "Inf Jump[F]",
+   Callback = function()
+-- //~ F to toggle ~\\ --
+
+_G.infinjump = true
+
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+Mouse.KeyDown:connect(function(k)
+if _G.infinjump then
+if k:byte() == 32 then
+Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+Humanoid:ChangeState("Jumping")
+wait(0.1)
+Humanoid:ChangeState("Seated")
+end
+end
+end)
+
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+Mouse.KeyDown:connect(function(k)
+k = k:lower()
+if k == "f" then
+if _G.infinjump == true then
+_G.infinjump = false
+else
+_G.infinjump = true
+end
+end
+end)
+   end,
+})
+
+local EspTab = Window:CreateTab("Esp", nil) -- Title, Image
+local EspSection = EspTab:CreateSection("Esp")
+
+local Button = EspTab:CreateButton({
+   Name = "Name Esp[P]",
+   Callback = function()
+local function API_Check()
+    if Drawing == nil then
+        return "No"
+    else
+        return "Yes"
+    end
+end
+
+local Find_Required = API_Check()
+
+if Find_Required == "No" then
+    game:GetService("StarterGui"):SetCore("SendNotification",{
+        Title = "Exunys Developer";
+        Text = "ESP script could not be loaded because your exploit is unsupported.";
+        Duration = math.huge;
+        Button1 = "OK"
+    })
+
+    return
+end
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Camera = workspace.CurrentCamera
+
+local Typing = false
+
+_G.SendNotifications = true   -- If set to true then the script would notify you frequently on any changes applied and when loaded / errored. (If a game can detect this, it is recommended to set it to false)
+_G.DefaultSettings = false   -- If set to true then the ESP script would run with default settings regardless of any changes you made.
+
+_G.TeamCheck = false   -- If set to true then the script would create ESP only for the enemy team members.
+
+_G.ESPVisible = true   -- If set to true then the ESP will be visible and vice versa.
+_G.TextColor = Color3.fromRGB(255, 0, 0)   -- The color that the boxes would appear as.
+_G.TextSize = 14   -- The size of the text.
+_G.Center = true   -- If set to true then the script would be located at the center of the label.
+_G.Outline = true   -- If set to true then the text would have an outline.
+_G.OutlineColor = Color3.fromRGB(0, 0, 0)   -- The outline color of the text.
+_G.TextTransparency = 0.7   -- The transparency of the text.
+_G.TextFont = Drawing.Fonts.UI   -- The font of the text. (UI, System, Plex, Monospace) 
+
+_G.DisableKey = Enum.KeyCode.P   -- The key that disables / enables the ESP.
+
+local function CreateESP()
+    for _, v in next, Players:GetPlayers() do
+        if v.Name ~= Players.LocalPlayer.Name then
+            local ESP = Drawing.new("Text")
+
+            RunService.RenderStepped:Connect(function()
+                if workspace:FindFirstChild(v.Name) ~= nil and workspace[v.Name]:FindFirstChild("HumanoidRootPart") ~= nil then
+                    local Vector, OnScreen = Camera:WorldToViewportPoint(workspace[v.Name]:WaitForChild("Head", math.huge).Position)
+
+                    ESP.Size = _G.TextSize
+                    ESP.Center = _G.Center
+                    ESP.Outline = _G.Outline
+                    ESP.OutlineColor = _G.OutlineColor
+                    ESP.Color = _G.TextColor
+                    ESP.Transparency = _G.TextTransparency
+                    ESP.Font = _G.TextFont
+
+                    if OnScreen == true then
+                        local Part1 = workspace:WaitForChild(v.Name, math.huge):WaitForChild("HumanoidRootPart", math.huge).Position
+                        local Part2 = workspace:WaitForChild(Players.LocalPlayer.Name, math.huge):WaitForChild("HumanoidRootPart", math.huge).Position or 0
+                        local Dist = (Part1 - Part2).Magnitude
+                        ESP.Position = Vector2.new(Vector.X, Vector.Y - 25)
+                        ESP.Text = ("("..tostring(math.floor(tonumber(Dist)))..") "..v.Name.." ["..workspace[v.Name].Humanoid.Health.."]")
+                        if _G.TeamCheck == true then 
+                            if Players.LocalPlayer.Team ~= v.Team then
+                                ESP.Visible = _G.ESPVisible
+                            else
+                                ESP.Visible = false
+                            end
+                        else
+                            ESP.Visible = _G.ESPVisible
+                        end
+                    else
+                        ESP.Visible = false
+                    end
+                else
+                    ESP.Visible = false
+                end
+            end)
+
+            Players.PlayerRemoving:Connect(function()
+                ESP.Visible = false
+            end)
+        end
+    end
+
+    Players.PlayerAdded:Connect(function(Player)
+        Player.CharacterAdded:Connect(function(v)
+            if v.Name ~= Players.LocalPlayer.Name then 
+                local ESP = Drawing.new("Text")
+    
+                RunService.RenderStepped:Connect(function()
+                    if workspace:FindFirstChild(v.Name) ~= nil and workspace[v.Name]:FindFirstChild("HumanoidRootPart") ~= nil then
+                        local Vector, OnScreen = Camera:WorldToViewportPoint(workspace[v.Name]:WaitForChild("Head", math.huge).Position)
+    
+                        ESP.Size = _G.TextSize
+                        ESP.Center = _G.Center
+                        ESP.Outline = _G.Outline
+                        ESP.OutlineColor = _G.OutlineColor
+                        ESP.Color = _G.TextColor
+                        ESP.Transparency = _G.TextTransparency
+    
+                        if OnScreen == true then
+                            local Part1 = workspace:WaitForChild(v.Name, math.huge):WaitForChild("HumanoidRootPart", math.huge).Position
+                        local Part2 = workspace:WaitForChild(Players.LocalPlayer.Name, math.huge):WaitForChild("HumanoidRootPart", math.huge).Position or 0
+                            local Dist = (Part1 - Part2).Magnitude
+                            ESP.Position = Vector2.new(Vector.X, Vector.Y - 25)
+                            ESP.Text = ("("..tostring(math.floor(tonumber(Dist)))..") "..v.Name.." ["..workspace[v.Name].Humanoid.Health.."]")
+                            if _G.TeamCheck == true then 
+                                if Players.LocalPlayer.Team ~= Player.Team then
+                                    ESP.Visible = _G.ESPVisible
+                                else
+                                    ESP.Visible = false
+                                end
+                            else
+                                ESP.Visible = _G.ESPVisible
+                            end
+                        else
+                            ESP.Visible = false
+                        end
+                    else
+                        ESP.Visible = false
+                    end
+                end)
+    
+                Players.PlayerRemoving:Connect(function()
+                    ESP.Visible = false
+                end)
+            end
+        end)
+    end)
+end
+
+if _G.DefaultSettings == true then
+    _G.TeamCheck = false
+    _G.ESPVisible = true
+    _G.TextColor = Color3.fromRGB(255, 0, 0)
+    _G.TextSize = 14
+    _G.Center = true
+    _G.Outline = false
+    _G.OutlineColor = Color3.fromRGB(0, 0, 0)
+    _G.DisableKey = Enum.KeyCode.P
+    _G.TextTransparency = 0.75
+end
+
+UserInputService.TextBoxFocused:Connect(function()
+    Typing = true
+end)
+
+UserInputService.TextBoxFocusReleased:Connect(function()
+    Typing = false
+end)
+
+UserInputService.InputBegan:Connect(function(Input)
+    if Input.KeyCode == _G.DisableKey and Typing == false then
+        _G.ESPVisible = not _G.ESPVisible
+        
+        if _G.SendNotifications == true then
+            game:GetService("StarterGui"):SetCore("SendNotification",{
+                Title = "Exunys Developer";
+                Text = "The ESP's visibility is now set to "..tostring(_G.ESPVisible)..".";
+                Duration = 5;
+            })
+        end
+    end
+end)
+
+local Success, Errored = pcall(function()
+    CreateESP()
+end)
+
+if Success and not Errored then
+    if _G.SendNotifications == true then
+        game:GetService("StarterGui"):SetCore("SendNotification",{
+            Title = "Load Z";
+            Text = "ESP script has successfully loaded.";
+            Duration = 5;
+        })
+    end
+elseif Errored and not Success then
+    if _G.SendNotifications == true then
+        game:GetService("StarterGui"):SetCore("SendNotification",{
+            Title = "Load Z";
+            Text = "ESP script has errored while loading, please check the developer console! (F9)";
+            Duration = 5;
+        })
+    end
+    TestService:Message("The ESP script has errored, please notify Exunys with the following information :")
+    warn(Errored)
+    print("!! IF THE ERROR IS A FALSE POSITIVE (says that a player cannot be found) THEN DO NOT BOTHER !!")
+end
+   end,
+})
+
+local TeleportTab = Window:CreateTab("Teleport", nil) -- Title, Image
+local TeleportSection = TeleportTab:CreateSection("Main")
+
+local Button = TeleportTab:CreateButton({
+   Name = "💸Bank💸",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-436.293091, 22.9756889, -284.663605)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🍔Food Store🍔",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(299.333008, 49.2826653, -614.396179)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🌮Taco🌮",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(555.591248, 51.061409, -494.514923)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "⛽Gas Station⛽",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(590.96167, 49.0000458, -259.772461)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🚨Police Station🚨️",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-267.225189, 21.7999573, -113.573311)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🛌Da Furniture🛌",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-489.567169, 21.9392605, -99.804039)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🏀Basketball🏀",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-931.971558, 22.0998211, -481.859589)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🚲Bycicle🚲",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-825.61615, 21.9998245, -537.159973)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🍔Food Store 2🍔",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-336.987122, 23.6826477, -298.932709)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🔫Tyrones Gun Store🔫",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(482.312347, 48.0705032, -624.330505)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🔫Tyrones Gun Store 2🔫",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-582.699829, 8.31478119, -736.593994)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🎄Christmas Tree🎄",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(66.5427094, 139, -697.639526)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🛡Uphill Armor🛡",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(539.091553, 50.3202744, -637.574951)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🛡Downhill Armor🛡",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-604.207581, 10.3496914, -788.651001)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🏋️Gym🏋️",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-77.2380142, 22.7002907, -638.656982)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🏥Hospital🏥",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(103.044769, 22.7999954, -485.358582)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🔥Flame🔥",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-153.65274, 53.8106155, -96.95858)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "💎Vault💎",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-503.625549, 23.1576424, -283.936401)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🏏Bat Downhill🏏",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-83.1895905, 21.75, -285.608185)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🥊Boxing🥊",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-232.054153, 22.0577793, -1118.96875)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "✂Clips✂",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.21504116, 21.75, -90.6753998)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🟩Greenscreen🟩",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-505.897461, 48.602375, -213.373596)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "👟Hood Kicks👟",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-223.948868, 21.8458023, -411.636627)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🧘Hoodfitness🧘",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.8536682, 22.7002907, -634.811951)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "😎Kool Klub😎",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-265.413391, 55.3804436, -454.11026)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🏞Playground🏞",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-230.296829, 22.1498718, -747.098389)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🤢Sewer🤢",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(103.128914, -26.7500305, -274.729767)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🚄Subway🚄",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-428.974976, -21.25, 44.8718376)
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "👮Unjail👮️",
+   Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-271.151978, 21.75, -243.19165)
+   end,
+})
