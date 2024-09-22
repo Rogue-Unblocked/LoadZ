@@ -274,7 +274,7 @@ local PredictionValue = 0.1413
 
                 game.StarterGui:SetCore("SendNotification", {
 
-                    Title = "Shertbert.cc";
+                    Title = "LoadZ.cc";
 
                     Text = "Unlocked",
 
